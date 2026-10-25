@@ -1,0 +1,26 @@
+.version-library { margin-bottom: 28px; }
+.version-library>header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.version-library h2 { font-size: 15px; margin: 0; }.version-library .icon-button { width: 35px; min-height: 35px; padding: 8px; }
+.version-cards { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; max-height: 340px; overflow-y: auto; }
+.version-card { border: 1px solid #e0e7f0; border-radius: 8px; background: white; padding: 19px 20px; text-align: left; color: #586d87; min-width: 0; }
+.version-card:hover { border-color: #a6c1e5; }.version-card[aria-pressed="true"] { border-color: #4481ce; background: #f5f9ff; box-shadow: 0 0 0 1px #4481ce12; }
+.version-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }.version-card strong { font-size: 15px; font-weight: 600; overflow-wrap: anywhere; }.version-card-top>span { flex-shrink: 0; color: #6286b6; font-size: 11px; padding-top: 2px; }
+.version-card p { font-size: 11px; color: #8799b0; line-height: 1.7; margin: 10px 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere; }.version-card small { font-size: 10px; color: #9aa7b8; }
+.frozen-version-heading { display: flex; justify-content: space-between; align-items: center; gap: 20px; margin-top: 8px; }.frozen-version-heading h2 { font-size: 21px; color: #4c627e; margin: 0 0 7px; overflow-wrap: anywhere; }.frozen-version-heading p { font-size: 12px; color: #7f91a9; line-height: 1.8; white-space: pre-wrap; margin: 0 0 7px; overflow-wrap: anywhere; }.frozen-version-heading small { font-size: 10px; color: #9ba7b8; }.frozen-version-heading .button { flex-shrink: 0; text-decoration: none; font-size: 12px; }
+.frozen-tip { border-left: 3px solid #cfdef3; background: #f8fafd; padding: 11px 14px; color: #8093af; font-size: 11px; line-height: 1.8; margin: 20px 0; }.frozen-tip a { color: #5680b9; text-decoration: none; }
+.raw-question-json { width: 100%; min-height: 100%; resize: none; font: 11px/1.85 Consolas,"Microsoft YaHei",monospace; border-color: #e5ebf4; color: #61758f; background: #fbfcff; padding: 15px 18px; }
+.copy-json-button { background: transparent; border: 0; padding: 7px 0; font-size: 11px; color: #7b98bf; }
+.frozen-version-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; flex-shrink: 0; }
+.delete-version-summary { font-size: 15px; color: #536982; overflow-wrap: anywhere; line-height: 1.8; margin: 0 0 12px; }
+.delete-version-description { font-size: 12px; line-height: 1.9; color: #8493a9; margin: 0; }
+.frozen-question-table .frozen-number-heading { width: 70px; }
+.frozen-question-table th:nth-child(2):not(.frozen-actions-column),.frozen-question-table td:nth-child(2):not(.frozen-actions-column) { position: static; left: auto; }
+.frozen-question-table .frozen-actions-column { width: 160px; position: sticky; right: 0; background: #fff; border-left: 1px solid #e8edf5; white-space: nowrap; }
+.frozen-question-table thead .frozen-actions-column { background: #f8fafd; z-index: 2; }
+.frozen-actions-column button + button { margin-left: 12px; }
+.delete-frozen-question { background: transparent; border: 0; padding: 0; color: #e46565; font-size: 11px; }
+.delete-frozen-question:hover { color: #bf3838; text-decoration: underline; }
+.delete-frozen-question-preview { max-height: 160px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12px; line-height: 1.8; color: #61758f; padding: 12px; background: #f8fafd; border: 1px solid #e5ecf5; border-radius: 5px; margin: 0 0 16px; }
+@media(max-width:1050px) { .version-cards { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media(max-width:760px) { .version-cards { grid-template-columns: 1fr; max-height: 290px; }.version-card { padding: 15px; }.frozen-version-heading h2 { font-size: 18px; }.frozen-version-heading { align-items: flex-start; }.frozen-tip { font-size: 10px; } }
+@media(max-width:480px) { .frozen-version-heading { flex-wrap: wrap; }.frozen-version-actions { width: 100%; justify-content: flex-start; } }

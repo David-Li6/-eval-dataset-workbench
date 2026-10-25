@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="color-scheme" content="light">
+  <title>评测集的原始源文档 · 评测集工作台</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/files.css"><link rel="stylesheet" href="/source-generation.css"><script type="module" src="/files.js"></script>
+</head>
+<body>
+  <nav class="app-nav" aria-label="工作台导航"><a class="workspace-brand" href="/"><img src="/favicon.svg" alt="" width="28" height="28">评测集工作台</a><div><a href="/files" aria-current="page">评测集的原始源文档</a><a href="/source-datasets">源文件生成评测集</a><a href="/expert-review">业务专家审核</a><a href="/technical-review">技术人员审核</a><a href="/frozen-datasets">冻结评测集</a><a href="/prompts">提示词库</a><a href="/">模型配置</a></div><span>本地工作空间</span></nav>
+  <main class="files-main">
+    <header class="page-header"><div><h1>评测集的原始源文档</h1><p class="page-subtitle">上传参考资料，随时查看文件内容。</p></div><button id="choose-top" type="button" class="button primary"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V3m-5 5 5-5 5 5M4 15v5h16v-5"/></svg>上传文件</button></header>
+    <div id="file-notice" class="notice" role="status" hidden></div>
+    <input id="file-input" type="file" multiple hidden aria-label="选择上传文件">
+    <section id="drop-zone" class="upload-zone" aria-label="文件上传区域">
+      <div class="upload-symbol"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M10 23H8a6 6 0 0 1-1-12 9 9 0 0 1 17-2 7 7 0 0 1 0 14h-2M16 27V14m-5 5 5-5 5 5"/></svg></div>
+      <h2>拖拽文件到这里，或 <button id="choose-inline" type="button">选择文件</button></h2>
+      <p>支持 CSV、Excel、Markdown、Word、TXT、PDF 等文件，可一次选择多个</p>
+      <div class="upload-formats"><span>CSV</span><span>XLSX</span><span>MD</span><span>DOCX</span><span>TXT</span><span>PDF</span><i>单个文件最大 50 MB</i></div>
+    </section>
+    <section id="upload-progress" class="upload-progress" aria-label="上传进度" hidden><div class="progress-heading"><strong id="upload-title">正在上传</strong><span id="upload-count"></span></div><div class="progress-track"><div id="progress-fill"></div></div><p id="upload-current" role="status"></p><div id="upload-errors" hidden></div></section>
+    <section class="file-library" aria-labelledby="library-title">
+      <div class="library-header"><div class="page-title"><h2 id="library-title">已上传文件</h2><span id="file-count" class="count">0</span></div><div class="library-tools"><div class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="file-search" type="search" placeholder="搜索文件名称..." aria-label="搜索文件名称"></div><button id="refresh-files" type="button" class="icon-button" aria-label="刷新文件列表" title="刷新文件列表"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5M6.3 7a7 7 0 0 1 11.5-1l2.2 3M4 15l2.2 3A7 7 0 0 0 18 17"/></svg></button></div></div>
+      <div class="source-selection-bar"><span id="source-selection-count" role="status">已选择 0 个源文件</span><button id="clear-source-selection" type="button" disabled>清空选择</button><a href="/source-datasets">查看生成的评测集</a><button id="generate-from-sources" class="button primary" type="button" disabled>AI 生成评测集</button></div>
+      <div class="file-table-wrap"><table class="file-table source-file-table"><thead><tr><th class="source-file-checkbox-cell"><input id="select-source-files" class="source-file-checkbox" type="checkbox" aria-label="全选当前搜索结果中的源文件" title="全选当前搜索结果中的源文件"></th><th>文件名称</th><th>类型</th><th>大小</th><th>上传时间</th><th>操作</th></tr></thead><tbody id="file-rows"></tbody></table></div>
+      <div id="files-loading" class="library-empty" role="status">正在读取文件列表...</div>
+      <div id="files-empty" class="library-empty" hidden><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M9 6h14l8 8v20H9V6Zm14 0v9h8M15 22h10m-10 6h7"/></svg><h3 id="empty-title">还没有上传文件</h3><p id="empty-description">上传的文件会显示在这里，点击文件名称即可查看详情。</p></div>
+    </section>
+    <footer class="page-footer"><span id="library-summary">评测集的原始源文档</span><span>文件保存在本机</span></footer>
+  </main>
+  <dialog id="delete-file-dialog" class="small-dialog file-delete-dialog" aria-labelledby="delete-file-title" aria-describedby="delete-file-description">
+    <h2 id="delete-file-title">删除源文档</h2>
+    <div class="file-delete-target"><strong id="delete-file-name"></strong><span id="delete-file-metadata"></span></div>
+    <p id="delete-file-description">确认删除这个源文档？删除后将从文件列表移除。已生成的评测集、审核内容和冻结版本会保留，已有生成任务不受影响。</p>
+    <div id="delete-file-error" class="editor-error" role="alert" hidden></div>
+    <div class="delete-actions"><button id="cancel-delete-file" class="button" type="button" autofocus>取消</button><button id="confirm-delete-file" class="button danger-solid" type="button">确认删除</button></div>
+  </dialog>
+  <dialog id="file-detail" class="file-detail" aria-labelledby="detail-title">
+    <header class="detail-header"><div class="detail-title-wrap"><span id="detail-icon" class="file-type-icon"></span><div><h2 id="detail-title">文件详情</h2><p id="detail-subtitle"></p></div></div><button id="close-detail" type="button" class="close-button" aria-label="关闭文件详情">×</button></header>
+    <div class="detail-metadata"><span id="detail-size"></span><span id="detail-date"></span><a id="download-file" class="button" href="#">下载原文件<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v13m-5-5 5 5 5-5M4 17v4h16v-4"/></svg></a></div>
+    <div class="preview-toolbar"><div class="preview-title">内容预览 <span id="preview-stats"></span></div><label id="sheet-control" hidden>工作表 <select id="preview-sheet"></select></label><div id="markdown-controls" class="preview-toggle" role="group" aria-label="Markdown 显示方式" hidden><button id="show-rendered" type="button" aria-pressed="true">预览</button><button id="show-raw" type="button" aria-pressed="false">原文</button></div></div>
+    <div id="preview-note" class="preview-note" hidden></div>
+    <div id="preview-content" class="preview-content" aria-busy="false"></div>
+    <footer class="detail-footer"><span>预览内容来自上传文件</span><button id="detail-done" class="button" type="button">关闭</button></footer>
+  </dialog>
+  <dialog id="generation-dialog" class="generation-dialog" aria-labelledby="generation-title"><form id="source-generation-form" novalidate><header class="dialog-header"><div><h2 id="generation-title">从源文件生成评测集</h2><p>选择模型和提示词，生成结果保存为 JSON。</p></div><button id="close-generation-dialog" class="close-button" type="button" aria-label="关闭生成设置">×</button></header><fieldset id="generation-fields"><div class="generation-form-body"><label>所选源文件</label><div id="generation-selected-files" class="generation-selected-files"></div><div class="generation-form-grid"><div class="field"><label for="generation-name">评测集名称</label><input id="generation-name" maxlength="100" required></div><div class="field"><label for="generation-count">生成题数</label><input id="generation-count" type="number" value="200" min="1" max="1000" required></div><div class="field"><label for="generation-provider">模型配置</label><select id="generation-provider"></select></div><div class="field"><label for="generation-model">使用模型</label><select id="generation-model"></select></div></div><p id="generation-destination" class="generation-hint"></p><div class="field"><label for="generation-template">提示词模板</label><select id="generation-template"><option value="">默认评测集生成提示词</option></select></div><div class="field"><label for="generation-prompt">生成提示词（可修改）</label><textarea id="generation-prompt" rows="10" maxlength="50000" spellcheck="false"></textarea></div><p class="generation-hint">{{参考资料}}、{{源文档}}、{{文件内容}} 自动填入当前批次资料，{{题目数量}} 填入本批题数，{{总题目数量}} 填入总题数。</p><section id="generation-variables-section" hidden><h3>填写模板变量</h3><div id="generation-variables" class="generation-form-grid"></div></section><details class="generation-advanced"><summary>分批与输出设置</summary><div class="generation-form-grid"><div class="field"><label for="generation-batch-size">每批题数（1–10）</label><input id="generation-batch-size" type="number" value="5" min="1" max="10"></div><div class="field"><label for="generation-timeout">单次生成超时（秒）</label><input id="generation-timeout" type="number" value="180" min="30" max="600"></div><div class="field"><label for="generation-max-tokens">单次输出 Token 上限</label><input id="generation-max-tokens" type="number" value="8192" min="256" max="32768"></div></div><p class="generation-hint">答案或评分标准较长时，可减小每批题数。任务在本机后台运行，关闭页面后可继续查看进度。</p></details><p class="generation-hint">输出包含 Question、User Question、SELECT Data、answer、Scoring criteria、difficulty、Task family、source。AI 生成内容需经过审核。</p></div></fieldset><div id="generation-error" class="editor-error" role="alert" hidden></div><footer class="dialog-footer"><span>使用已保存的模型配置，按服务方规则计费</span><div><button id="cancel-source-generation" class="button" type="button">取消</button><button id="start-source-generation" class="button primary" type="submit">开始生成</button></div></footer></form></dialog>
+</body>
+</html>
+
+
+
+

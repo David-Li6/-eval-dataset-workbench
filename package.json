@@ -1,0 +1,12 @@
+{
+  "name": "eval-dataset-workspace",
+  "version": "0.9.0",
+  "private": true,
+  "type": "module",
+  "description": "本地评测集构建工具：模型配置、源文档、提示词模板、业务专家审核、技术审核与冻结版本",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "engines": { "node": ">=22" }
+}

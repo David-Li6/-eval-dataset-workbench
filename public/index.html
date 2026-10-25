@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="color-scheme" content="light">
+  <title>模型配置 · 评测集工作台</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/styles.css"><script src="/app.js" defer></script>
+</head>
+<body>
+  <nav class="app-nav" aria-label="工作台导航"><a class="workspace-brand" href="/"><img src="/favicon.svg" alt="" width="28" height="28">评测集工作台</a><div><a href="/files">评测集的原始源文档</a><a href="/source-datasets">源文件生成评测集</a><a href="/expert-review">业务专家审核</a><a href="/technical-review">技术人员审核</a><a href="/frozen-datasets">冻结评测集</a><a href="/prompts">提示词库</a><a href="/" aria-current="page">模型配置</a></div><span>本地工作空间</span></nav>
+  <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="provider-icon" viewBox="0 0 32 32"><path fill="#0755bb" d="M3 3h12v6a3 3 0 1 1 0 6H9v-3a3 3 0 1 0-6 0V3Z"/><path fill="#b9d4f6" d="M17 3h12v12h-6a3 3 0 1 0-6 0V9h3a3 3 0 0 0-3-6Z"/><path fill="#b9d4f6" d="M3 17h6a3 3 0 1 0 6 0v6h-3a3 3 0 1 0 0 6H3V17Z"/><path fill="#0755bb" d="M17 17h6v3a3 3 0 1 0 6 0v9H17v-6a3 3 0 1 1 0-6Z"/></symbol>
+    <symbol id="plus-icon" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></symbol>
+    <symbol id="refresh-icon" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5M6.3 7a7 7 0 0 1 11.5-1l2.2 3M4 15l2.2 3A7 7 0 0 0 18 17"/></symbol>
+  </defs></svg>
+  <main>
+    <header class="page-header">
+      <div class="page-title"><h1>模型配置</h1><span id="provider-count" class="count" hidden></span></div>
+      <div class="toolbar">
+        <div class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="search" type="search" placeholder="搜索模型配置..." aria-label="搜索模型配置" autocomplete="off"></div>
+        <button id="refresh" class="icon-button" type="button" title="刷新模型配置列表" aria-label="刷新模型配置列表"><svg aria-hidden="true"><use href="#refresh-icon"/></svg></button>
+        <button id="add-provider" class="button primary" type="button"><svg aria-hidden="true"><use href="#plus-icon"/></svg>添加模型配置</button>
+      </div>
+    </header>
+    <div id="notice" class="notice" role="status" hidden></div>
+    <div id="loading" class="loading-state" role="status">正在读取模型配置...</div>
+    <section id="providers-grid" class="providers-grid" aria-label="模型配置列表"></section>
+    <section id="empty-state" class="empty-state" hidden><div class="empty-icon"><svg aria-hidden="true"><use href="#provider-icon"/></svg></div><h2>添加你的第一个模型配置</h2><p>保存模型服务的接口信息，即可随时管理和测试连接。</p><button id="add-first" class="button primary" type="button"><svg aria-hidden="true"><use href="#plus-icon"/></svg>添加模型配置</button></section>
+    <section id="no-results" class="empty-state compact" hidden><h2>未找到匹配的模型配置</h2><p>试试其他名称、模型或接口地址。</p><button id="clear-search" class="button" type="button">清空搜索</button></section>
+    <footer class="page-footer"><span>评测集工作台</span><span>配置保存在本机 · API Key 使用 Windows 账户加密</span></footer>
+  </main>
+  <dialog id="provider-dialog" aria-labelledby="dialog-title">
+    <form id="provider-form" novalidate autocomplete="off">
+      <header class="dialog-header"><div><h2 id="dialog-title">添加模型配置</h2><p id="dialog-subtitle">配置 OpenAI 兼容的模型服务</p></div><button id="close-dialog" type="button" class="close-button" aria-label="关闭设置">×</button></header>
+      <fieldset id="editor-fields">
+        <div class="tabs" role="tablist" aria-label="模型配置"><button id="connection-tab" type="button" role="tab" aria-controls="connection-panel" aria-selected="true" tabindex="0">连接设置</button><button id="models-tab" type="button" role="tab" aria-controls="models-panel" aria-selected="false" tabindex="-1">模型管理 <span id="model-count">0</span></button></div>
+        <div class="dialog-body">
+          <section id="connection-panel" role="tabpanel" aria-labelledby="connection-tab">
+            <div class="field"><label for="provider-name">配置名称 <span class="required">*</span></label><input id="provider-name" placeholder="例如：云端deepseek、本地Qwen等等" maxlength="80" required></div>
+            <div class="field"><label for="base-url">Base URL <span class="required">*</span></label><input id="base-url" type="url" placeholder="http://127.0.0.1:8000/v1" maxlength="2048" required spellcheck="false" aria-describedby="url-hint"><p id="url-hint" class="hint">支持基础地址、/models 地址或完整的 /chat/completions 地址。</p></div>
+            <div class="field"><div class="label-row"><label for="api-key">API Key <span class="optional">选填</span></label><label id="clear-key-label" class="checkbox-label" hidden><input id="clear-key" type="checkbox">清除已保存密钥</label></div><div class="key-input"><input id="api-key" type="password" maxlength="4096" placeholder="无需鉴权时留空" autocomplete="new-password" spellcheck="false"><button id="toggle-key" type="button" aria-label="显示 API Key" aria-pressed="false">显示</button></div><p id="key-hint" class="hint">保存后会加密存储，列表中仅显示遮罩。</p></div>
+            <div class="field timeout-field"><div><label for="timeout">连接超时</label><p class="hint">本地模型加载较慢时，可增加等待时间</p></div><select id="timeout"><option value="30">30 秒</option><option value="60" selected>60 秒</option><option value="120">120 秒</option><option value="180">180 秒</option></select></div>
+            <div class="endpoint"><span>实际测试地址</span><code id="endpoint-preview">填写 Base URL 后显示</code></div>
+          </section>
+          <section id="models-panel" role="tabpanel" aria-labelledby="models-tab" hidden>
+            <div class="field"><label for="model-names">模型名称 <span class="required">*</span></label><p class="hint model-hint">每行一个模型 ID，使用接口实际提供的名称。可为同一模型配置多个模型。</p><textarea id="model-names" rows="7" maxlength="25700" spellcheck="false" placeholder="qwen3-8b-base&#10;qwen3-8b-base-tools" required></textarea><p class="hint">保存时自动去掉重复名称，最多 100 个模型。</p></div>
+          </section>
+          <div class="test-area"><div class="test-heading"><h3>测试连接</h3><span>发送一次真实请求</span></div><div class="test-controls"><select id="test-model" aria-label="选择测试模型"><option value="">请先在模型管理中填写模型</option></select><button id="test-connection" type="button" class="button test-button"><svg aria-hidden="true"><use href="#refresh-icon"/></svg><span id="test-button-text">测试连接</span></button></div><p class="hint">测试消息：请只回复：连接成功</p></div>
+        </div>
+      </fieldset>
+      <div id="test-result" class="test-result" role="status" aria-live="polite" hidden><div class="test-result-title"><strong id="result-title"></strong><span id="result-meta"></span></div><p id="result-description"></p><pre id="result-output" hidden></pre></div>
+      <div id="editor-error" class="editor-error" role="alert" hidden></div>
+      <footer class="dialog-footer"><span id="save-note">保存后可在列表中继续管理</span><div><button id="cancel-dialog" type="button" class="button">取消</button><button id="save-provider" type="submit" class="button primary">保存模型配置</button></div></footer>
+    </form>
+  </dialog>
+  <dialog id="delete-dialog" class="small-dialog" aria-labelledby="delete-title"><h2 id="delete-title">删除模型配置</h2><p id="delete-description"></p><div id="delete-error" class="editor-error" role="alert" hidden></div><div class="delete-actions"><button id="cancel-delete" type="button" class="button">取消</button><button id="confirm-delete" type="button" class="button danger-solid">删除模型配置</button></div></dialog>
+</body>
+</html>
+
+
+

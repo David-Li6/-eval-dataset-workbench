@@ -1,0 +1,85 @@
+.prompts-main { max-width: 1500px; }
+.prompt-subtitle { margin: 7px 0 0; color: #7a8699; font-size: 13px; }
+.prompts-main .page-header .primary { min-height: 43px; padding: 9px 18px; font-size: 13px; }
+.prompts-main .page-header svg { width: 18px; height: 18px; }
+.library-controls { display: flex; align-items: center; gap: 12px; padding: 17px 0 24px; border-top: 1px solid #ecf0f5; }
+.library-controls .search { width: 310px; }
+.library-controls .search input { height: 39px; padding-left: 37px; font-size: 12px; }
+.library-controls .search svg { width: 17px; height: 17px; top: 11px; left: 12px; }
+.library-controls select { font-size: 12px; min-height: 39px; max-width: 200px; }
+.library-controls .icon-button { height: 39px; width: 39px; min-height: 39px; }
+.library-controls .icon-button svg { width: 18px; height: 18px; }
+.variable-tip { color: #8994a7; font-size: 11px; margin-left: auto; }
+.variable-tip code { color: #557eb6; background: #f1f5fc; border-radius: 3px; padding: 3px 5px; font: 11px Consolas,"Microsoft YaHei",monospace; }
+.templates-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 22px; }
+.template-card { border: 1px solid #e0e6ef; border-radius: 9px; background: white; padding: 22px 24px 18px; min-width: 0; display: flex; flex-direction: column; box-shadow: 0 3px 14px #172b4d04; transition: border-color .15s,box-shadow .15s; }
+.template-card:hover { border-color: #c4d5ec; box-shadow: 0 5px 17px #172b4d09; }
+.template-card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+.template-category { font-size: 10px; color: #5b7fae; background: #f0f5fd; border-radius: 4px; padding: 3px 8px; max-width: 65%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.template-date { color: #929cad; font-size: 10px; white-space: nowrap; }
+.template-title { font-size: 18px; font-weight: 600; margin: 0 0 7px; }
+.template-title button { padding: 0; border: 0; background: transparent; font: inherit; text-align: left; color: #35445c; overflow-wrap: anywhere; }
+.template-title button:hover { color: #0751b5; }
+.template-description { color: #7c889b; font-size: 11px; margin: 0 0 15px; line-height: 1.8; overflow-wrap: anywhere; }
+.template-excerpt { padding: 13px 14px; border: 1px solid #edf0f5; background: #f9fafc; border-radius: 6px; margin-bottom: 13px; flex: 1; min-height: 95px; }
+.template-excerpt pre { white-space: pre-wrap; overflow-wrap: anywhere; font: 11px/1.8 Consolas,"Microsoft YaHei",monospace; color: #748099; margin: 0; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; max-height: 80px; }
+.template-variables-info { font-size: 10px; color: #8796aa; margin-bottom: 17px; display: flex; justify-content: space-between; gap: 12px; }
+.template-actions { display: flex; align-items: center; gap: 10px; padding-top: 15px; border-top: 1px solid #edf0f5; }
+.template-actions .button { font-size: 11px; min-height: 33px; padding: 5px 12px; }
+.template-actions .use-button { background: #edf4ff; color: #2766bb; border-color: #dce8fa; margin-right: auto; }
+.template-actions .use-button:hover { background: #e3edfd; }
+.template-actions .text-action { border: 0; padding: 5px 2px; background: transparent; font-size: 11px; color: #7487a3; }
+.template-actions .delete-action { color: #c77d77; margin-left: 3px; }
+.template-empty { padding: 80px 20px; border: 1px dashed #d6e0ee; border-radius: 9px; text-align: center; background: #fcfdff; }
+.empty-prompt-icon { width: 64px; height: 64px; background: #edf3fd; border-radius: 17px; color: #6c94cd; display: grid; place-items: center; margin: 0 auto 21px; }
+.empty-prompt-icon svg { width: 32px; height: 32px; stroke-width: 1.5; }
+.template-empty h2 { margin: 0 0 9px; font-size: 20px; font-weight: 600; color: #40516c; }
+.template-empty p { font-size: 12px; color: #8490a3; margin: 0 0 25px; }
+.template-empty>div:last-child { display: flex; justify-content: center; gap: 12px; }
+.template-empty .button { font-size: 12px; }
+.template-empty.compact { border: 0; padding: 70px 20px; }
+.template-editor { width: min(800px,calc(100% - 32px)); }
+.editor-body { padding: 0 27px 22px; }
+.editor-metadata { display: grid; grid-template-columns: 1.4fr 1fr; gap: 18px; }
+.template-editor input { font-size: 12px; }
+.template-editor .field { margin-bottom: 17px; }
+.template-editor .prompt-content-field { margin-bottom: 11px; }
+.template-editor textarea { min-height: 270px; width: 100%; font: 12px/1.85 Consolas,"Microsoft YaHei",monospace; padding: 13px 15px; }
+.content-label { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.content-label>span { font: 10px Consolas,monospace; color: #95a1b2; }
+.editor-variable-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 15px; }
+.editor-variable-row>div { display: flex; align-items: flex-start; gap: 10px; }
+.editor-variable-row>div>span { color: #7e8da4; font-size: 11px; padding-top: 2px; white-space: nowrap; }
+.variable-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.variable-tags span { color: #6e89af; background: #f0f5fc; font-size: 10px; padding: 2px 7px; border-radius: 4px; overflow-wrap: anywhere; }
+.variable-tags .no-variables { padding: 0; background: transparent; color: #96a0b1; font-size: 11px; }
+#insert-variable { font-size: 11px; color: #5782bc; border: 0; background: transparent; padding: 2px 0; white-space: nowrap; }
+.use-template-dialog { width: min(1100px,calc(100% - 32px)); }
+.use-template-dialog .dialog-header { border-bottom: 1px solid #e8edf4; }
+.use-body { display: grid; grid-template-columns: 285px minmax(0,1fr); }
+.variable-panel { padding: 22px 23px; border-right: 1px solid #e8edf4; background: #fafbfd; max-height: 60vh; overflow-y: auto; }
+.variable-panel h3,.result-panel h3 { margin: 0; font-size: 13px; font-weight: 600; color: #566b8a; }
+.variable-panel>p { color: #91a0b6; font-size: 10px; margin: 6px 0 21px; }
+.variable-panel .field { margin-bottom: 17px; }
+.variable-panel label { font-size: 11px; color: #7687a0; overflow-wrap: anywhere; }
+.variable-panel textarea { min-height: 73px; font-size: 12px; line-height: 1.7; resize: vertical; width: 100%; }
+.result-panel { padding: 22px 25px; min-width: 0; }
+.result-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 13px; }
+.result-heading>span { font-size: 10px; color: #8a9ab0; }
+.result-heading>span.complete { color: #43947d; }
+#rendered-prompt { display: block; width: 100%; height: min(48vh,500px); min-height: 260px; font: 12px/1.9 Consolas,"Microsoft YaHei",monospace; color: #596c86; background: #fcfdff; resize: vertical; padding: 16px 18px; }
+.use-body.no-variables { grid-template-columns: 1fr; }
+.use-body.no-variables .variable-panel { display: none; }
+.use-footer .button { font-size: 12px; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media(min-width:1500px) { .templates-grid { grid-template-columns: repeat(3,minmax(0,1fr)); } }
+@media(max-width:1100px) { .variable-tip { display: none; }.use-body { grid-template-columns: 240px minmax(0,1fr); } }
+@media(max-width:760px) {
+  .templates-grid { grid-template-columns: 1fr; gap: 18px; }.template-card { padding: 21px 20px 17px; }
+  .prompt-subtitle { font-size: 11px; }.prompts-main .page-header { gap: 16px; }.prompts-main .page-header .primary { font-size: 12px; padding: 8px 12px; }
+  .library-controls { gap: 9px; }.library-controls .search { width: auto; flex: 1; min-width: 0; }.library-controls select { max-width: 110px; font-size: 11px; }
+  .editor-body { padding: 0 20px 20px; }.editor-metadata { grid-template-columns: 1fr; gap: 0; }.template-editor textarea { min-height: 220px; }
+  .use-body { grid-template-columns: 1fr; }.variable-panel { border-right: 0; border-bottom: 1px solid #e8edf4; max-height: 31vh; padding: 18px 20px; }.variable-panel>p { margin-bottom: 14px; }
+  .result-panel { padding: 18px 20px; }#rendered-prompt { height: 33vh; min-height: 200px; }.result-heading { gap: 8px; }.use-footer .button { padding: 8px 11px; font-size: 11px; }
+  .template-empty { padding: 60px 18px; }.template-empty>div:last-child { flex-wrap: wrap; }
+}

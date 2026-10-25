@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="color-scheme" content="light">
+  <title>提示词库 · 评测集工作台</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/prompts.css"><script type="module" src="/prompts.js"></script>
+</head>
+<body>
+  <nav class="app-nav" aria-label="工作台导航"><a class="workspace-brand" href="/"><img src="/favicon.svg" alt="" width="28" height="28">评测集工作台</a><div><a href="/files">评测集的原始源文档</a><a href="/source-datasets">源文件生成评测集</a><a href="/expert-review">业务专家审核</a><a href="/technical-review">技术人员审核</a><a href="/frozen-datasets">冻结评测集</a><a href="/prompts" aria-current="page">提示词库</a><a href="/">模型配置</a></div><span>本地工作空间</span></nav>
+  <main class="prompts-main">
+    <header class="page-header"><div><div class="page-title"><h1>提示词库</h1><span id="template-count" class="count" hidden></span></div><p class="prompt-subtitle">把常用提示词保存成模板，下次使用时直接调用。</p></div><button id="add-template" type="button" class="button primary"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg>添加模板</button></header>
+    <div id="prompt-notice" class="notice" role="status" hidden></div>
+    <div class="library-controls"><div class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="template-search" type="search" placeholder="搜索模板名称、用途或正文..." aria-label="搜索提示词模板"></div><select id="category-filter" aria-label="按分类筛选"><option value="">全部分类</option></select><button id="refresh-templates" type="button" class="icon-button" aria-label="刷新提示词库" title="刷新提示词库"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5M6.3 7a7 7 0 0 1 11.5-1l2.2 3M4 15l2.2 3A7 7 0 0 0 18 17"/></svg></button><span class="variable-tip">用 <code>{{变量名}}</code> 预留每次需要填写的内容</span></div>
+    <div id="templates-loading" class="loading-state" role="status">正在读取提示词模板...</div>
+    <section id="templates-grid" class="templates-grid" aria-label="提示词模板列表"></section>
+    <section id="templates-empty" class="template-empty" hidden><div class="empty-prompt-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 6h22v16H16l-7 5v-5H5V6Zm5 6h12m-12 5h8"/></svg></div><h2>建立你的提示词库</h2><p>保存问题生成、参考答案、评分标准等常用提示词，随时取用。</p><div><button id="add-first-template" class="button primary" type="button">添加第一个模板</button><button id="create-example" class="button" type="button">从示例开始</button></div></section>
+    <section id="template-no-results" class="template-empty compact" hidden><h2>没有找到匹配的模板</h2><p>可以调整搜索内容或分类筛选。</p><button id="reset-filters" class="button" type="button">清空筛选</button></section>
+    <footer class="page-footer"><span id="templates-summary">提示词模板</span><span>模板保存在本机 · 下次打开可继续使用</span></footer>
+  </main>
+
+  <dialog id="template-editor" class="template-editor" aria-labelledby="editor-title">
+    <form id="template-form" novalidate autocomplete="off">
+      <header class="dialog-header"><div><h2 id="editor-title">添加提示词模板</h2><p>编写一次，按需填写变量，重复使用</p></div><button id="close-editor" class="close-button" type="button" aria-label="关闭模板编辑">×</button></header>
+      <fieldset id="template-fields"><div class="editor-body">
+        <div class="editor-metadata"><div class="field"><label for="template-name">模板名称 <span class="required">*</span></label><input id="template-name" maxlength="100" placeholder="例如：评测问题生成" required></div><div class="field"><label for="template-category">分类 <span class="optional">选填</span></label><input id="template-category" list="template-categories" maxlength="40" placeholder="例如：评测集构建"><datalist id="template-categories"></datalist></div></div>
+        <div class="field"><label for="template-description">用途说明 <span class="optional">选填</span></label><input id="template-description" maxlength="300" placeholder="简单说明这个模板用在什么场景"></div>
+        <div class="field prompt-content-field"><div class="content-label"><label for="template-content">提示词正文 <span class="required">*</span></label><span id="content-count">0 / 50,000</span></div><textarea id="template-content" maxlength="50000" rows="13" placeholder="请根据以下资料，生成 {{题目数量}} 道关于 {{领域}} 的评测题。&#10;&#10;参考资料：&#10;{{参考资料}}" spellcheck="false" required></textarea></div>
+        <div class="editor-variable-row"><div><span>模板变量</span><div id="editor-variables" class="variable-tags"></div></div><button id="insert-variable" type="button">插入变量</button></div>
+        <p class="hint">使用 {{变量名}} 标记需要替换的内容，同名变量只需填写一次。正文会按您编写的内容保存。</p>
+      </div></fieldset>
+      <div id="template-error" class="editor-error" role="alert" hidden></div>
+      <footer class="dialog-footer"><span>保存后可在提示词库中使用</span><div><button id="cancel-editor" type="button" class="button">取消</button><button id="save-template" type="submit" class="button primary">保存模板</button></div></footer>
+    </form>
+  </dialog>
+
+  <dialog id="use-template-dialog" class="use-template-dialog" aria-labelledby="use-title">
+    <header class="dialog-header"><div><h2 id="use-title">使用模板</h2><p id="use-description"></p></div><button id="close-use" class="close-button" type="button" aria-label="关闭使用模板">×</button></header>
+    <div id="use-body" class="use-body"><section id="variable-panel" class="variable-panel" aria-labelledby="variables-title"><h3 id="variables-title">填写模板变量</h3><p>填写后，右侧会自动生成完整提示词。</p><div id="variable-inputs"></div></section><section class="result-panel" aria-labelledby="rendered-title"><div class="result-heading"><h3 id="rendered-title">完整提示词</h3><span id="render-status"></span></div><label class="visually-hidden" for="rendered-prompt">完整提示词正文</label><textarea id="rendered-prompt" readonly spellcheck="false"></textarea></section></div>
+    <div id="use-error" class="editor-error" role="status" hidden></div>
+    <footer class="dialog-footer use-footer"><span id="use-tip">复制后可直接粘贴到模型输入中</span><div><button id="copy-original" type="button" class="button">复制模板原文</button><button id="copy-completed" type="button" class="button primary">复制完整提示词</button></div></footer>
+  </dialog>
+
+  <dialog id="delete-template-dialog" class="small-dialog" aria-labelledby="delete-template-title"><h2 id="delete-template-title">删除提示词模板</h2><p id="delete-template-description"></p><div id="delete-template-error" class="editor-error" role="alert" hidden></div><div class="delete-actions"><button id="cancel-delete-template" class="button" type="button">取消</button><button id="confirm-delete-template" class="button danger-solid" type="button">删除模板</button></div></dialog>
+</body>
+</html>
+
+
+
